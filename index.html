@@ -3,245 +3,454 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1220">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070b12">
+  <meta name="description" content="Daily Flow entwickelt eine neue Art, Kundenkommunikation und wiederkehrende Büroaufgaben mit intelligenten digitalen Werkzeugen zu vereinfachen.">
+  <title>Daily Flow — Make work flow.</title>
 
-  <title>Daily Flow – Weniger Büroarbeit. Mehr Zeit fürs Geschäft.</title>
-  <meta name="description" content="Daily Flow ist ein KI-Softwareprojekt in Entwicklung. Die Vision: kleine Unternehmen bei Kundenkommunikation, Textarbeit und wiederkehrenden Büroaufgaben unterstützen.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://d4ily.de/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #0b1220;
-      --bg-soft: #101a2b;
-      --card: #121f32;
-      --card-hover: #17263b;
-      --text: #f4f7fb;
-      --muted: #aab7c9;
-      --green: #8be0b0;
-      --green-dark: #173d31;
-      --border: rgba(255,255,255,.10);
-      --radius: 22px;
-      --max: 1120px;
+      --bg: #070b12;
+      --surface: #0d1420;
+      --surface-2: #111c2a;
+      --text: #f2f7f5;
+      --muted: #9baab7;
+      --green: #a4ffcb;
+      --green-2: #5be6a0;
+      --cyan: #7cebdc;
+      --line: rgba(190, 255, 221, .13);
+      --glass: rgba(15, 27, 39, .72);
+      --radius: 24px;
+      --max: 1160px;
     }
 
     * { box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 90px;
+      scroll-padding-top: 95px;
     }
 
     body {
       margin: 0;
+      background: var(--bg);
       color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
       background:
-        radial-gradient(ellipse at 80% 0%, rgba(65,145,115,.13), transparent 38%),
-        var(--bg);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.65;
+        radial-gradient(ellipse at 14% 12%, rgba(40, 156, 103, .13), transparent 32%),
+        radial-gradient(ellipse at 87% 34%, rgba(37, 126, 122, .10), transparent 30%),
+        radial-gradient(ellipse at 48% 90%, rgba(69, 112, 155, .08), transparent 34%);
     }
 
     a { color: var(--green); }
-    a:hover { color: #b8f2d0; }
+    a:hover { color: white; }
 
-    button, input, textarea { font: inherit; }
+    button, textarea { font: inherit; }
+
+    button, a { -webkit-tap-highlight-color: transparent; }
 
     .container {
-      width: min(var(--max), calc(100% - 40px));
+      width: min(var(--max), calc(100% - 44px));
       margin: 0 auto;
     }
+
+    /* Navigation */
 
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 10;
-      background: rgba(11,18,32,.88);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(18px);
+      z-index: 100;
+      background: rgba(7, 11, 18, .78);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
     }
 
     .nav {
-      min-height: 72px;
+      min-height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 25px;
     }
 
     .brand {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 1.35rem;
+      font-family: "Manrope", sans-serif;
       font-weight: 800;
-      letter-spacing: -.7px;
+      font-size: 1.45rem;
+      letter-spacing: -1.2px;
+      color: white;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
-    .brand span { color: var(--green); }
+    .brand .accent { color: var(--green); }
 
     .navlinks {
       display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
       align-items: center;
+      gap: 25px;
     }
 
     .navlinks a {
-      color: var(--muted);
+      position: relative;
+      color: #b4c0cb;
+      font-size: .89rem;
       text-decoration: none;
-      font-size: .92rem;
+      transition: color .25s;
     }
 
-    .navlinks a:hover { color: var(--green); }
+    .navlinks a::after {
+      content: "";
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      height: 1px;
+      width: 0;
+      background: var(--green);
+      transition: width .25s ease;
+    }
+
+    .navlinks a:hover { color: white; }
+    .navlinks a:hover::after { width: 100%; }
+
+    /* Hero */
 
     .hero {
-      padding: 100px 0 82px;
+      position: relative;
+      min-height: 670px;
+      padding: 115px 0 105px;
       display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 48px;
+      grid-template-columns: 1.15fr .85fr;
       align-items: center;
+      gap: 65px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 470px;
+      height: 470px;
+      right: 1%;
+      top: 9%;
+      z-index: -1;
+      border-radius: 50%;
+      background: rgba(70, 255, 168, .075);
+      filter: blur(90px);
+      animation: glow 8s ease-in-out infinite alternate;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      padding: 7px 12px;
-      border: 1px solid rgba(139,224,176,.28);
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(164,255,203,.22);
       border-radius: 100px;
-      color: var(--green);
-      background: rgba(139,224,176,.07);
-      font-size: .84rem;
-      font-weight: 650;
+      background: rgba(105,255,174,.055);
+      color: #c2ffdb;
+      font-size: .78rem;
+      letter-spacing: .7px;
+      font-weight: 700;
+      animation: fadeUp .7s both;
     }
 
-    .dot {
+    .pulse {
       width: 8px;
       height: 8px;
+      flex-shrink: 0;
       border-radius: 50%;
       background: var(--green);
-      box-shadow: 0 0 12px rgba(139,224,176,.5);
+      box-shadow: 0 0 14px var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    h1, h2, h3, p { overflow-wrap: anywhere; }
+
+    h1, h2, h3 {
+      font-family: "Manrope", sans-serif;
     }
 
     h1 {
-      margin: 23px 0 20px;
       max-width: 760px;
-      font-size: clamp(2.6rem, 6vw, 4.7rem);
-      line-height: 1.04;
-      letter-spacing: -3px;
+      margin: 26px 0 24px;
+      font-size: clamp(3.2rem, 6.1vw, 5.6rem);
+      line-height: 1.035;
+      letter-spacing: -4px;
+      font-weight: 800;
+      animation: fadeUp .85s .08s both;
     }
 
-    h1 span { color: var(--green); }
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(100deg, #c8ffdd 0%, #72f0ad 48%, #72e9d8 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
 
     .hero-copy {
-      max-width: 660px;
-      color: var(--muted);
+      max-width: 620px;
+      color: #aab8c4;
       font-size: 1.12rem;
+      line-height: 1.9;
+      animation: fadeUp .85s .16s both;
+    }
+
+    .hero-copy strong {
+      color: #eaf6ef;
+      font-weight: 600;
     }
 
     .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
+      gap: 13px;
+      margin-top: 30px;
+      animation: fadeUp .85s .24s both;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 47px;
-      padding: 12px 19px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
+      gap: 9px;
+      min-height: 50px;
+      padding: 13px 20px;
+      border-radius: 13px;
+      border: 1px solid transparent;
       text-decoration: none;
-      font-weight: 750;
-      transition: transform .18s, background .18s;
+      font-weight: 700;
+      font-size: .91rem;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s, background .25s, border-color .25s;
     }
 
-    .btn:hover { transform: translateY(-2px); }
+    .btn:hover { transform: translateY(-3px); }
 
     .btn-primary {
-      background: var(--green);
-      color: #0b1b14;
-      border-color: var(--green);
+      color: #06150d;
+      background: linear-gradient(120deg, #b5ffd1, #72edaa);
+      box-shadow: 0 0 25px rgba(115,239,167,.15);
     }
 
-    .btn-primary:hover { color: #0b1b14; background: #b3f0cd; }
+    .btn-primary:hover {
+      color: #06150d;
+      box-shadow: 0 0 36px rgba(115,239,167,.3);
+    }
 
     .btn-secondary {
-      color: var(--text);
-      background: rgba(255,255,255,.03);
+      color: #e9f3ee;
+      border-color: rgba(255,255,255,.13);
+      background: rgba(255,255,255,.035);
     }
 
-    .hero-panel {
-      padding: 28px;
-      border: 1px solid var(--border);
-      border-radius: 26px;
-      background: linear-gradient(145deg, rgba(22,39,59,.96), rgba(15,26,42,.96));
-      box-shadow: 0 24px 80px rgba(0,0,0,.18);
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.075);
+      border-color: rgba(164,255,203,.32);
+    }
+
+    /* Hero product panel */
+
+    .visual {
+      position: relative;
+      animation: floatIn 1s .2s both;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 310px;
+      height: 310px;
+      border: 1px solid rgba(164,255,203,.12);
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      top: 30px;
+      right: 38px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--green);
+    }
+
+    .product-panel {
+      position: relative;
+      padding: 27px;
+      border-radius: 27px;
+      border: 1px solid rgba(190,255,221,.17);
+      background: linear-gradient(145deg, rgba(22,38,51,.9), rgba(10,17,27,.92));
+      box-shadow: 0 30px 100px rgba(0,0,0,.32), inset 0 1px rgba(255,255,255,.035);
+      backdrop-filter: blur(15px);
+    }
+
+    .panel-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
     }
 
     .panel-label {
-      color: var(--muted);
-      font-size: .8rem;
+      color: #95a9b5;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-weight: 700;
-    }
-
-    .panel-title {
-      font-size: 1.55rem;
-      line-height: 1.25;
-      margin: 10px 0 20px;
-    }
-
-    .mini-item {
-      display: flex;
-      gap: 13px;
-      padding: 15px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .mini-icon {
-      flex: 0 0 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      background: var(--green-dark);
-      border-radius: 11px;
-      color: var(--green);
+      letter-spacing: 1.6px;
+      font-size: .69rem;
       font-weight: 800;
     }
 
-    .mini-item strong { display: block; }
-    .mini-item small { color: var(--muted); }
+    .live-tag {
+      font-size: .69rem;
+      color: var(--green);
+      border: 1px solid rgba(164,255,203,.2);
+      background: rgba(164,255,203,.06);
+      border-radius: 7px;
+      padding: 5px 8px;
+    }
 
-    section { padding: 76px 0; }
+    .panel-heading {
+      margin: 22px 0 20px;
+      font-family: "Manrope", sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -.6px;
+      line-height: 1.3;
+    }
+
+    .preview-message {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 15px;
+      padding: 17px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .message-caption {
+      color: #8799a8;
+      font-size: .74rem;
+      margin-bottom: 8px;
+    }
+
+    .message-text {
+      color: #d9e4e7;
+      font-size: .9rem;
+      line-height: 1.7;
+    }
+
+    .preview-arrow {
+      text-align: center;
+      color: var(--green);
+      padding: 11px;
+      font-size: 1.1rem;
+    }
+
+    .preview-answer {
+      border: 1px solid rgba(164,255,203,.18);
+      background: rgba(85,227,145,.055);
+      border-radius: 15px;
+      padding: 17px;
+    }
+
+    .answer-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: .75rem;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+
+    .answer-label span {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    .preview-answer p {
+      margin: 0;
+      color: #c5d7d0;
+      font-size: .86rem;
+    }
+
+    .panel-foot {
+      margin-top: 16px;
+      color: #8396a4;
+      font-size: .73rem;
+    }
+
+    /* Sections */
+
+    section { padding: 105px 0; }
 
     .section-head {
-      max-width: 730px;
-      margin-bottom: 32px;
+      max-width: 720px;
+      margin-bottom: 42px;
     }
 
     .kicker {
+      display: inline-block;
       color: var(--green);
-      font-weight: 800;
-      font-size: .8rem;
-      letter-spacing: 1.7px;
       text-transform: uppercase;
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: 2px;
     }
 
     h2 {
-      margin: 9px 0 14px;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.14;
-      letter-spacing: -1.5px;
+      font-size: clamp(2.25rem, 4.3vw, 3.6rem);
+      line-height: 1.15;
+      letter-spacing: -2px;
+      margin: 14px 0 18px;
+      font-weight: 750;
     }
 
-    .section-head p, .muted { color: var(--muted); }
+    .section-head p, .muted {
+      color: var(--muted);
+      font-size: 1.01rem;
+      line-height: 1.85;
+    }
+
+    .underline {
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .underline::after {
+      content: "";
+      position: absolute;
+      height: 7px;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      background: rgba(114,240,173,.27);
+      border-radius: 50%;
+      filter: blur(3px);
+    }
+
+    /* Feature cards */
 
     .grid {
       display: grid;
@@ -250,195 +459,368 @@
     }
 
     .card {
-      padding: 25px;
-      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,.085);
       border-radius: var(--radius);
-      background: var(--card);
+      background: linear-gradient(145deg, rgba(19,31,44,.88), rgba(11,19,30,.85));
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
     }
 
-    .card h3 { margin: 13px 0 9px; font-size: 1.15rem; }
-    .card p { margin: 0; color: var(--muted); font-size: .96rem; }
-    .card-icon { font-size: 1.7rem; }
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      top: -110px;
+      right: -70px;
+      border-radius: 50%;
+      background: rgba(105,255,174,.11);
+      filter: blur(45px);
+      transition: opacity .3s;
+      opacity: .35;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(164,255,203,.3);
+      box-shadow: 0 18px 50px rgba(0,0,0,.2), 0 0 25px rgba(84,224,145,.045);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      display: grid;
+      place-items: center;
+      width: 49px;
+      height: 49px;
+      border-radius: 15px;
+      border: 1px solid rgba(164,255,203,.16);
+      background: linear-gradient(145deg, rgba(164,255,203,.13), rgba(164,255,203,.025));
+      font-size: 1.35rem;
+      margin-bottom: 22px;
+    }
+
+    .card h3 {
+      font-size: 1.12rem;
+      letter-spacing: -.4px;
+      margin: 0 0 11px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: .93rem;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* Two column layouts */
 
     .split {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 22px;
       align-items: start;
+      gap: 55px;
     }
 
     .feature-list {
       list-style: none;
       padding: 0;
-      margin: 18px 0 0;
+      margin: 22px 0 0;
     }
 
     .feature-list li {
       position: relative;
-      padding: 10px 0 10px 29px;
-      border-bottom: 1px solid var(--border);
-      color: var(--muted);
+      padding: 13px 0 13px 32px;
+      border-bottom: 1px solid rgba(255,255,255,.065);
+      color: #bac7cf;
     }
 
     .feature-list li::before {
       content: "✓";
       position: absolute;
       left: 0;
+      top: 13px;
       color: var(--green);
       font-weight: 900;
     }
 
+    .feature-list strong { color: #eef7f2; font-weight: 600; }
+
+    /* Demo */
+
     .demo-card {
-      padding: 28px;
-      border: 1px solid rgba(139,224,176,.24);
-      border-radius: var(--radius);
-      background: linear-gradient(145deg, #132b29, #121f32 75%);
+      padding: 30px;
+      border-radius: 25px;
+      border: 1px solid rgba(164,255,203,.19);
+      background:
+        radial-gradient(ellipse at top right, rgba(78,216,146,.09), transparent 50%),
+        rgba(14,24,36,.88);
+      box-shadow: 0 24px 75px rgba(0,0,0,.16);
+    }
+
+    .demo-heading {
+      font-family: "Manrope", sans-serif;
+      font-size: 1.15rem;
+      font-weight: 750;
+    }
+
+    .demo-subtitle {
+      margin: 5px 0 22px;
+      color: var(--muted);
+      font-size: .88rem;
     }
 
     label {
       display: block;
-      margin: 16px 0 7px;
+      margin: 16px 0 9px;
+      font-size: .88rem;
       font-weight: 700;
-      font-size: .92rem;
     }
 
-    textarea, input {
+    textarea {
+      display: block;
       width: 100%;
+      min-height: 130px;
+      padding: 15px;
+      resize: vertical;
       color: var(--text);
-      background: rgba(5,12,22,.65);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 13px 14px;
+      background: rgba(3,8,14,.7);
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 13px;
       outline: none;
+      transition: border-color .2s, box-shadow .2s;
     }
 
-    textarea { min-height: 125px; resize: vertical; }
-
-    textarea:focus, input:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(139,224,176,.1);
+    textarea:focus {
+      border-color: rgba(164,255,203,.55);
+      box-shadow: 0 0 0 3px rgba(164,255,203,.075);
     }
+
+    textarea::placeholder { color: #687b88; }
+
+    .demo-actions { margin-top: 14px; }
+    .demo-actions .btn { flex: 1; }
 
     .demo-output {
-      margin-top: 18px;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: rgba(4,12,20,.5);
+      margin-top: 19px;
+      min-height: 115px;
+      padding: 19px;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
+      color: #cddbd6;
+      font-size: .9rem;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      background: rgba(0,0,0,.2);
     }
 
     .notice {
-      color: var(--muted);
-      font-size: .84rem;
-      margin-top: 12px;
+      color: #82949f;
+      font-size: .79rem;
+      line-height: 1.7;
+      margin-top: 13px;
     }
+
+    /* Roadmap */
 
     .steps {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      counter-reset: step;
+      gap: 16px;
     }
 
     .step {
-      counter-increment: step;
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: rgba(255,255,255,.025);
+      position: relative;
+      padding: 25px 22px;
+      border-top: 1px solid rgba(164,255,203,.35);
+      background: linear-gradient(180deg, rgba(164,255,203,.045), transparent 90%);
     }
 
-    .step::before {
-      content: "0" counter(step);
+    .step-number {
       color: var(--green);
-      font-size: .83rem;
-      font-weight: 900;
+      font-family: "Manrope", sans-serif;
+      font-size: .8rem;
+      font-weight: 800;
       letter-spacing: 1px;
     }
 
-    .step h3 { font-size: 1rem; margin: 11px 0 7px; }
-    .step p { color: var(--muted); font-size: .91rem; margin: 0; }
+    .step h3 { font-size: 1rem; margin: 14px 0 8px; }
+    .step p { color: var(--muted); font-size: .88rem; margin: 0; line-height: 1.8; }
 
     .status-banner {
-      padding: 28px;
-      border: 1px solid rgba(139,224,176,.22);
-      border-radius: var(--radius);
-      background: rgba(139,224,176,.055);
+      margin-top: 30px;
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(164,255,203,.16);
+      background: linear-gradient(110deg, rgba(164,255,203,.065), rgba(164,255,203,.015));
     }
 
-    .status-banner h3 { margin-top: 0; }
-    .status-banner p { color: var(--muted); margin-bottom: 0; }
+    .status-banner h3 { margin: 0 0 9px; font-size: 1.1rem; }
+    .status-banner p { margin: 0; color: var(--muted); }
+
+    /* Contact */
 
     .contact-card {
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 25px;
-      padding: 32px;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: var(--card);
+      padding: 42px;
+      border-radius: 28px;
+      border: 1px solid rgba(164,255,203,.2);
+      background:
+        radial-gradient(ellipse at 90% 10%, rgba(96,245,164,.13), transparent 38%),
+        linear-gradient(135deg, #111f2b, #0b121c);
+      box-shadow: 0 20px 80px rgba(0,0,0,.18);
     }
+
+    .contact-card h3 {
+      margin: 9px 0;
+      font-size: 1.8rem;
+      letter-spacing: -1px;
+    }
+
+    .contact-card p { color: var(--muted); margin: 0; }
 
     .email {
       display: inline-block;
-      margin-top: 6px;
-      font-size: 1.15rem;
-      font-weight: 750;
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-top: 10px;
+      text-decoration: none;
       overflow-wrap: anywhere;
     }
 
+    /* Legal and footer */
+
     .legal-note {
-      padding: 20px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      color: var(--muted);
-      background: rgba(255,255,255,.025);
+      padding: 25px;
+      color: #a8b6c0;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      background: rgba(255,255,255,.022);
       font-size: .9rem;
     }
 
+    .legal-note p:first-child { margin-top: 0; }
+    .legal-note p:last-child { margin-bottom: 0; }
+
     footer {
-      margin-top: 30px;
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: .9rem;
+      margin-top: 35px;
+      padding: 40px 0 30px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.12);
     }
 
     .footer-inner {
       display: flex;
-      justify-content: space-between;
       align-items: flex-start;
+      justify-content: space-between;
+      gap: 28px;
       flex-wrap: wrap;
-      gap: 20px;
     }
 
-    .footer-links { display: flex; flex-wrap: wrap; gap: 16px; }
-    .footer-links a { color: var(--muted); }
+    .footer-description {
+      color: #81919d;
+      font-size: .86rem;
+      margin: 10px 0 6px;
+    }
 
-    @media (max-width: 850px) {
-      .hero { grid-template-columns: 1fr; padding-top: 70px; }
+    .footer-meta {
+      color: #758590;
+      font-size: .8rem;
+      margin: 3px 0;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: #9cabb5;
+      font-size: .84rem;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover { color: var(--green); }
+
+    /* Scroll reveal */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--green); }
+      50% { opacity: .55; box-shadow: 0 0 4px var(--green); }
+    }
+
+    @keyframes glow {
+      from { opacity: .6; transform: scale(.92); }
+      to { opacity: 1; transform: scale(1.08); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(18px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 950px) {
+      .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 90px; }
+      .visual { max-width: 540px; width: 100%; margin: 0 auto; }
       .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .split { gap: 32px; }
     }
 
-    @media (max-width: 580px) {
-      .container { width: min(100% - 28px, var(--max)); }
-      .nav { align-items: flex-start; padding: 15px 0; flex-direction: column; gap: 10px; }
-      .navlinks { gap: 12px 16px; }
-      .navlinks a { font-size: .85rem; }
-      h1 { letter-spacing: -1.8px; }
-      section { padding: 55px 0; }
+    @media (max-width: 650px) {
+      .container { width: calc(100% - 32px); }
+      .nav { align-items: flex-start; flex-direction: column; padding: 14px 0 16px; gap: 10px; }
+      .navlinks { gap: 12px 17px; flex-wrap: wrap; }
+      .navlinks a { font-size: .81rem; }
+      .hero { min-height: auto; padding: 76px 0 68px; gap: 40px; }
+      h1 { font-size: clamp(2.9rem, 13vw, 4.2rem); letter-spacing: -2.8px; }
+      .hero-copy { font-size: 1rem; }
+      section { padding: 73px 0; }
+      h2 { letter-spacing: -1.3px; }
       .grid, .split, .steps { grid-template-columns: 1fr; }
-      .hero-panel, .demo-card, .contact-card { padding: 21px; }
+      .product-panel, .demo-card { padding: 22px; }
+      .orbit { width: 250px; height: 250px; }
+      .contact-card { padding: 27px; }
+      .contact-card .btn { width: 100%; }
+      .demo-actions { flex-direction: column; }
+      .footer-inner { flex-direction: column; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { transition: none !important; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -446,11 +828,11 @@
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="#start" aria-label="Daily Flow Startseite">daily<span>flow</span></a>
+      <a class="brand" href="#start">daily<span class="accent">flow</span></a>
       <nav class="navlinks" aria-label="Hauptnavigation">
         <a href="#funktionen">Funktionen</a>
         <a href="#demo">Demo</a>
-        <a href="#projekt">Über das Projekt</a>
+        <a href="#projekt">Projekt</a>
         <a href="#entwicklung">Roadmap</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
@@ -460,87 +842,92 @@
   <main>
     <div class="container hero" id="start">
       <div>
-        <div class="eyebrow"><span class="dot"></span> Startup-Projekt in Entwicklung</div>
-        <h1>Weniger Büroarbeit.<br><span>Mehr Zeit fürs Geschäft.</span></h1>
+        <div class="eyebrow"><span class="pulse"></span> Startup-Projekt in Entwicklung</div>
+        <h1>Make work flow.<br><span class="gradient-text">Not slow.</span></h1>
         <p class="hero-copy">
+          <strong>Weniger Büroarbeit. Mehr Zeit fürs Geschäft.</strong>
           Daily Flow ist die Vision eines intelligenten digitalen Assistenten,
           der kleine Unternehmen bei Kundenkommunikation, Textarbeit und
-          wiederkehrenden Büroaufgaben unterstützt – damit mehr Zeit für das
-          Wesentliche bleibt.
+          wiederkehrenden Büroaufgaben unterstützt.
         </p>
         <div class="actions">
-          <a class="btn btn-primary" href="#demo">Demo ausprobieren</a>
-          <a class="btn btn-secondary" href="#projekt">Das Projekt kennenlernen</a>
+          <a class="btn btn-primary" href="#demo">Demo ausprobieren <span>↗</span></a>
+          <a class="btn btn-secondary" href="#projekt">Unsere Vision entdecken</a>
         </div>
       </div>
 
-      <aside class="hero-panel" aria-label="Die Idee hinter Daily Flow">
-        <div class="panel-label">Die Idee</div>
-        <div class="panel-title">Alltägliche Aufgaben einfacher machen.</div>
-        <div class="mini-item">
-          <div class="mini-icon">01</div>
-          <div><strong>Klar kommunizieren</strong><small>Professionelle Antworten auf Kundenanfragen vorbereiten.</small></div>
+      <div class="visual">
+        <div class="orbit"></div>
+        <div class="product-panel">
+          <div class="panel-top">
+            <div>
+              <div class="panel-label">Daily Flow Workspace</div>
+              <div style="margin-top:5px;font-size:.82rem;color:#b9c8ce">Ein neuer Arbeitsfluss</div>
+            </div>
+            <div class="live-tag">PROTOTYP</div>
+          </div>
+
+          <div class="panel-heading">Aus einer Anfrage wird ein klarer nächster Schritt.</div>
+
+          <div class="preview-message">
+            <div class="message-caption">KUNDENANFRAGE</div>
+            <div class="message-text">„Hallo, ich wollte fragen, ob Sie mir ein Update zu meiner Anfrage geben können.“</div>
+          </div>
+
+          <div class="preview-arrow">↓</div>
+
+          <div class="preview-answer">
+            <div class="answer-label"><span></span> ANTWORTENTWURF · BEISPIEL</div>
+            <p>Guten Tag, vielen Dank für Ihre Nachricht. Wir prüfen Ihr Anliegen und melden uns so bald wie möglich mit einem Update.</p>
+          </div>
+
+          <div class="panel-foot">Konzeptvorschau · Noch keine echte KI-Generierung</div>
         </div>
-        <div class="mini-item">
-          <div class="mini-icon">02</div>
-          <div><strong>Weniger Routine</strong><small>Wiederkehrende Schreibaufgaben effizienter erledigen.</small></div>
-        </div>
-        <div class="mini-item">
-          <div class="mini-icon">03</div>
-          <div><strong>Mehr Überblick</strong><small>Einfachere Arbeitsabläufe für den Unternehmensalltag entwickeln.</small></div>
-        </div>
-      </aside>
+      </div>
     </div>
 
     <section id="funktionen">
       <div class="container">
-        <div class="section-head">
-          <div class="kicker">Die geplanten Funktionen</div>
-          <h2>Ein digitaler Assistent für den Arbeitsalltag.</h2>
+        <div class="section-head reveal">
+          <div class="kicker">Die Idee hinter dem Produkt</div>
+          <h2>Weniger Routine.<br><span class="gradient-text">Mehr Möglichkeiten.</span></h2>
           <p>
-            Daily Flow soll dort helfen, wo im Tagesgeschäft immer wieder Zeit
-            verloren geht: beim Formulieren, Beantworten und Strukturieren von
-            Informationen. Die folgenden Funktionen beschreiben das geplante
-            Produkt und sind noch nicht vollständig verfügbar.
+            Daily Flow soll alltägliche Arbeitsabläufe vereinfachen und kleine
+            Unternehmen dabei unterstützen, ihre Zeit sinnvoller einzusetzen.
+            Diese Funktionen sind geplant und befinden sich noch in Entwicklung.
           </p>
         </div>
 
         <div class="grid">
-          <article class="card">
-            <div class="card-icon">✉️</div>
-            <h3>Kundenanfragen beantworten</h3>
-            <p>Aus einer eingehenden Nachricht soll schnell ein freundlicher,
-              verständlicher und professioneller Antwortentwurf entstehen.</p>
+          <article class="card reveal">
+            <div class="card-icon">✉</div>
+            <h3>Kundenkommunikation</h3>
+            <p>Antwortentwürfe für häufige Kundenanfragen vorbereiten – freundlich, klar und professionell.</p>
           </article>
-          <article class="card">
-            <div class="card-icon">✍️</div>
-            <h3>Texte verbessern</h3>
-            <p>Texte sollen sich überarbeiten, kürzen, verständlicher formulieren
-              und an einen gewünschten Ton anpassen lassen.</p>
+          <article class="card reveal">
+            <div class="card-icon">✳</div>
+            <h3>Intelligente Textarbeit</h3>
+            <p>Texte verbessern, kürzen, verständlicher formulieren und an den gewünschten Ton anpassen.</p>
           </article>
-          <article class="card">
-            <div class="card-icon">⏱️</div>
-            <h3>Routinezeit reduzieren</h3>
-            <p>Wiederkehrende Schreib- und Büroaufgaben sollen mit unterstützenden
-              digitalen Werkzeugen einfacher werden.</p>
+          <article class="card reveal">
+            <div class="card-icon">↗</div>
+            <h3>Mehr Zeit im Alltag</h3>
+            <p>Wiederkehrende Schreibaufgaben effizienter gestalten, damit mehr Zeit für wichtige Aufgaben bleibt.</p>
           </article>
-          <article class="card">
-            <div class="card-icon">🧩</div>
-            <h3>Einfach bedienbar</h3>
-            <p>Die Anwendung soll übersichtlich und ohne komplizierte
-              Einarbeitung im Arbeitsalltag nutzbar sein.</p>
+          <article class="card reveal">
+            <div class="card-icon">◇</div>
+            <h3>Einfach statt kompliziert</h3>
+            <p>Eine übersichtliche Oberfläche und verständliche Abläufe, die sich am tatsächlichen Bedarf orientieren.</p>
           </article>
-          <article class="card">
-            <div class="card-icon">🏢</div>
+          <article class="card reveal">
+            <div class="card-icon">▦</div>
             <h3>Für kleine Unternehmen</h3>
-            <p>Der Schwerpunkt liegt auf kleinen Unternehmen und Selbstständigen,
-              die viele Aufgaben selbst organisieren.</p>
+            <p>Die Produktidee richtet sich an kleine Unternehmen und Selbstständige mit vielen täglichen Aufgaben.</p>
           </article>
-          <article class="card">
-            <div class="card-icon">🔧</div>
-            <h3>Schrittweise ausbauen</h3>
-            <p>Das Produkt soll auf Basis von Tests und tatsächlichem Bedarf
-              weiterentwickelt werden, statt unnötig kompliziert zu starten.</p>
+          <article class="card reveal">
+            <div class="card-icon">⌘</div>
+            <h3>Schrittweise wachsen</h3>
+            <p>Neue Funktionen auf Basis von Tests, Nutzerfeedback und echtem praktischem Nutzen entwickeln.</p>
           </article>
         </div>
       </div>
@@ -548,36 +935,35 @@
 
     <section id="demo">
       <div class="container split">
-        <div>
+        <div class="reveal">
           <div class="kicker">Interaktive Vorschau</div>
-          <h2>So könnte Daily Flow helfen.</h2>
+          <h2>Erlebe den Gedanken hinter <span class="underline">Daily Flow.</span></h2>
           <p class="muted">
-            Gib eine beispielhafte Kundenanfrage ein und erzeuge einen
-            einfachen Antwortentwurf. Diese Vorschau demonstriert den
-            geplanten Ablauf – sie nutzt derzeit kein KI-Modell.
+            Wie könnte ein Antwortassistent im Alltag funktionieren?
+            Mit dieser kleinen Vorschau kannst du einen möglichen Ablauf
+            ausprobieren.
           </p>
           <ul class="feature-list">
-            <li>Eine Nachricht als Ausgangspunkt</li>
-            <li>Ein höflicher Antwortentwurf als Vorschlag</li>
-            <li>Du behältst die Kontrolle über den endgültigen Text</li>
+            <li>Eine beispielhafte Anfrage eingeben</li>
+            <li>Einen einfachen Antwortentwurf erhalten</li>
+            <li>Den Vorschlag prüfen und selbst entscheiden</li>
           </ul>
         </div>
 
-        <div class="demo-card">
-          <strong>Daily Flow · Demo</strong>
-          <label for="request">Beispiel einer Kundenanfrage</label>
-          <textarea id="request" maxlength="1200" placeholder="Beispiel: Guten Tag, könnten Sie mir bitte mitteilen, wann meine Bestellung ankommt?"></textarea>
-          <div class="actions">
-            <button class="btn btn-primary" type="button" id="generate">Antwortentwurf erstellen</button>
-            <button class="btn btn-secondary" type="button" id="clear">Zurücksetzen</button>
+        <div class="demo-card reveal">
+          <div class="demo-heading">Dein Antwortassistent</div>
+          <p class="demo-subtitle">Eine kleine Vorschau auf die geplante Funktion.</p>
+          <label for="request">Was hat dein Kunde geschrieben?</label>
+          <textarea id="request" maxlength="1200" placeholder="z. B. Guten Tag, wann kann ich mit einer Rückmeldung rechnen?"></textarea>
+          <div class="actions demo-actions">
+            <button class="btn btn-primary" id="generate" type="button">Entwurf erstellen ↗</button>
+            <button class="btn btn-secondary" id="clear" type="button">Zurücksetzen</button>
           </div>
-          <div id="output" class="demo-output" aria-live="polite">
-            Dein Antwortentwurf wird hier angezeigt.
-          </div>
+          <div class="demo-output" id="output" aria-live="polite">Dein Entwurf wird hier angezeigt.</div>
           <p class="notice">
-            Hinweis: Die Ausgabe basiert auf einer einfachen lokalen Vorlage,
-            nicht auf künstlicher Intelligenz. Bitte gib keine vertraulichen
-            oder personenbezogenen Informationen ein.
+            Diese Demo verwendet eine feste Textvorlage und kein KI-Modell.
+            Die Eingabe wird durch den Demo-Code nicht an eine KI-API gesendet.
+            Bitte keine vertraulichen oder personenbezogenen Daten eingeben.
           </p>
         </div>
       </div>
@@ -585,31 +971,33 @@
 
     <section id="projekt">
       <div class="container split">
-        <div>
+        <div class="reveal">
           <div class="kicker">Über Daily Flow</div>
-          <h2>Eine praktische Idee für bessere Arbeitsabläufe.</h2>
+          <h2>Technologie, die den Alltag <span class="gradient-text">leichter machen soll.</span></h2>
           <p class="muted">
-            Viele kleine Unternehmen müssen täglich Kundenanfragen beantworten,
-            Informationen formulieren und administrative Aufgaben erledigen.
-            Diese Arbeit ist notwendig, nimmt aber Zeit in Anspruch, die an
-            anderer Stelle fehlt.
+            Kundenanfragen beantworten, Texte verfassen und administrative
+            Aufgaben erledigen: Im Unternehmensalltag wiederholen sich viele
+            Arbeitsschritte. Sie sind wichtig, kosten aber Zeit und Aufmerksamkeit.
           </p>
           <p class="muted">
-            Daily Flow soll einen leicht verständlichen Ansatz bieten, um
-            solche Aufgaben mithilfe moderner KI-Technologie vorzubereiten
-            und zu vereinfachen. Ziel ist es, Menschen zu unterstützen – nicht,
-            ihnen die Kontrolle über ihre Kommunikation abzunehmen.
+            Daily Flow verfolgt die Idee, solche Aufgaben mit intelligenten
+            digitalen Werkzeugen zugänglicher zu machen. Im Mittelpunkt stehen
+            praktische Unterstützung, verständliche Bedienung und die Kontrolle
+            der Nutzer über ihre Kommunikation.
           </p>
         </div>
-        <div class="card">
-          <h3>Projekt auf einen Blick</h3>
+
+        <div class="card reveal">
+          <div class="kicker">Projektübersicht</div>
           <ul class="feature-list">
-            <li><strong>Zielgruppe:</strong> Kleine Unternehmen und Selbstständige</li>
+            <li><strong>Projekt:</strong> Daily Flow</li>
+            <li><strong>Website:</strong> d4ily.de</li>
             <li><strong>Bereich:</strong> KI-Software und Produktivität</li>
-            <li><strong>Produktidee:</strong> Unterstützung bei Texten und Kundenkommunikation</li>
-            <li><strong>Geschäftsmodell:</strong> Noch in Planung</li>
+            <li><strong>Zielgruppe:</strong> Kleine Unternehmen und Selbstständige</li>
+            <li><strong>Produktidee:</strong> Kundenkommunikation und Textassistenz</li>
             <li><strong>Aktueller Stand:</strong> Konzept und Website-Prototyp</li>
             <li><strong>KI-Integration:</strong> Noch nicht implementiert</li>
+            <li><strong>Geschäftsmodell:</strong> In Planung</li>
           </ul>
         </div>
       </div>
@@ -617,115 +1005,100 @@
 
     <section id="entwicklung">
       <div class="container">
-        <div class="section-head">
-          <div class="kicker">Nächste Schritte</div>
-          <h2>Von der Idee zum nutzbaren Produkt.</h2>
+        <div class="section-head reveal">
+          <div class="kicker">Die nächsten Schritte</div>
+          <h2>Eine Idee. Ein Plan.<br><span class="gradient-text">Schritt für Schritt.</span></h2>
           <p>
-            Der Entwicklungsplan beschreibt die geplante Richtung. Die
-            einzelnen Schritte sind noch nicht alle abgeschlossen und können
-            sich im Verlauf der Entwicklung verändern.
+            Daily Flow soll in Etappen entwickelt werden: von einem klaren
+            Anwendungsfall über einen funktionierenden Prototyp bis hin zu
+            Tests und Verbesserungen.
           </p>
         </div>
 
         <div class="steps">
-          <article class="step">
-            <h3>Konzept schärfen</h3>
-            <p>Die wichtigsten Anwendungsfälle definieren und den tatsächlichen
-              Bedarf kleiner Unternehmen besser verstehen.</p>
+          <article class="step reveal">
+            <div class="step-number">PHASE 01</div>
+            <h3>Konzept konkretisieren</h3>
+            <p>Die wichtigsten Anwendungsfälle und den Bedarf der Zielgruppe besser verstehen.</p>
           </article>
-          <article class="step">
-            <h3>Prototyp entwickeln</h3>
-            <p>Die zentralen Abläufe und eine einfache, verständliche
-              Benutzeroberfläche ausarbeiten.</p>
+          <article class="step reveal">
+            <div class="step-number">PHASE 02</div>
+            <h3>Prototyp aufbauen</h3>
+            <p>Die zentralen Abläufe und eine einfache, verständliche Oberfläche entwickeln.</p>
           </article>
-          <article class="step">
-            <h3>KI-Funktionen integrieren</h3>
-            <p>Geeignete KI-Schnittstellen prüfen und eine sichere,
-              nachvollziehbare Integration entwickeln.</p>
+          <article class="step reveal">
+            <div class="step-number">PHASE 03</div>
+            <h3>KI integrieren</h3>
+            <p>Eine passende KI-Schnittstelle prüfen und die technische Integration planen und umsetzen.</p>
           </article>
-          <article class="step">
+          <article class="step reveal">
+            <div class="step-number">PHASE 04</div>
             <h3>Testen und verbessern</h3>
-            <p>Ergebnisse prüfen, Rückmeldungen auswerten und das Produkt
-              schrittweise verbessern.</p>
+            <p>Ergebnisse prüfen, Feedback sammeln und das Produkt gezielt weiterentwickeln.</p>
           </article>
         </div>
 
-        <div class="status-banner" style="margin-top:22px">
-          <h3>Aktueller Entwicklungsstatus</h3>
+        <div class="status-banner reveal">
+          <h3><span class="gradient-text">Aktueller Stand</span> — in Entwicklung</h3>
           <p>
-            Daily Flow befindet sich in einer frühen Entwicklungsphase.
-            Die Website und die Demo dienen zur Vorstellung des Konzepts.
-            Es gibt derzeit noch kein vollständig integriertes KI-Produkt,
-            und es wird keine fertige KI-Dienstleistung versprochen.
+            Die Website und die interaktive Demo zeigen das Konzept von Daily Flow.
+            Ein vollständig integriertes KI-Produkt ist derzeit noch nicht verfügbar.
+            Die geplanten Funktionen werden schrittweise ausgearbeitet.
           </p>
         </div>
       </div>
     </section>
 
-    <section id="ki-datenschutz">
+    <section id="verantwortung">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div class="kicker">Verantwortung und Transparenz</div>
-          <h2>KI mit nachvollziehbarem Nutzen.</h2>
+          <h2>Hilfreiche KI beginnt mit <span class="underline">Vertrauen.</span></h2>
           <p>
-            Vertrauen gehört zur Produktidee. Deshalb sollen zukünftige
-            KI-Funktionen verständlich, überprüfbar und mit einem
-            verantwortungsvollen Umgang mit Daten entwickelt werden.
+            Bei der Entwicklung zukünftiger KI-Funktionen sollen Verständlichkeit,
+            verantwortungsvolle Datenverarbeitung und die Kontrolle durch Menschen
+            von Anfang an berücksichtigt werden.
           </p>
         </div>
 
         <div class="grid">
-          <article class="card">
-            <div class="card-icon">🔎</div>
-            <h3>Transparente Ergebnisse</h3>
-            <p>KI-generierte Texte sollen als Vorschläge erkennbar sein und
-              vor einer Verwendung geprüft werden können.</p>
+          <article class="card reveal">
+            <div class="card-icon">◎</div>
+            <h3>Nachvollziehbare Vorschläge</h3>
+            <p>Generierte Texte sollen als Vorschläge erkennbar sein und vor der Verwendung geprüft werden können.</p>
           </article>
-          <article class="card">
-            <div class="card-icon">🔐</div>
+          <article class="card reveal">
+            <div class="card-icon">⌑</div>
             <h3>Datenschutz mitdenken</h3>
-            <p>Vor einer echten KI-Integration müssen Datenflüsse, notwendige
-              Schutzmaßnahmen und die geltenden Datenschutzpflichten geprüft werden.</p>
+            <p>Vor einer echten KI-Integration müssen Datenflüsse, Schutzmaßnahmen und geltende Pflichten geprüft werden.</p>
           </article>
-          <article class="card">
-            <div class="card-icon">👤</div>
-            <h3>Der Mensch entscheidet</h3>
-            <p>Das Ziel ist Unterstützung bei der Arbeit. Nutzer sollen
-              die Kontrolle über ihre Nachrichten und Entscheidungen behalten.</p>
+          <article class="card reveal">
+            <div class="card-icon">◉</div>
+            <h3>Menschen behalten Kontrolle</h3>
+            <p>Das Ziel ist Unterstützung im Arbeitsalltag – nicht, die Verantwortung für Kommunikation und Entscheidungen zu ersetzen.</p>
           </article>
         </div>
 
-        <p class="notice">
-          Technischer Hinweis: Die aktuelle Demo verarbeitet den eingegebenen
-          Text mit einer einfachen JavaScript-Vorlage im Browser und sendet
-          ihn nicht an eine KI-API. Der Hosting-Anbieter kann unabhängig davon
-          technische Zugriffsdaten verarbeiten. Bitte keine sensiblen Daten
-          in die Demo eingeben.
+        <p class="notice reveal">
+          Die Demo auf dieser Website nutzt eine einfache lokale JavaScript-Vorlage.
+          Sie sendet die Eingabe nicht an eine KI-API. Unabhängig davon kann der
+          Hosting-Anbieter technische Zugriffsdaten verarbeiten. Bitte keine
+          sensiblen Informationen in die Demo eingeben.
         </p>
       </div>
     </section>
 
     <section id="kontakt">
       <div class="container">
-        <div class="section-head">
-          <div class="kicker">Kontakt und Support</div>
-          <h2>Fragen, Ideen oder Feedback?</h2>
-          <p>
-            Du möchtest mehr über Daily Flow erfahren oder Rückmeldung zum
-            Konzept geben? Schreib uns eine E-Mail.
-          </p>
-        </div>
-
-        <div class="contact-card">
+        <div class="contact-card reveal">
           <div>
-            <strong>Daily Flow · Kontakt</strong><br>
+            <div class="kicker">Kontakt & Support</div>
+            <h3>Wir freuen uns auf deine Nachricht.</h3>
+            <p>Fragen, Ideen oder Feedback zum Projekt? Schreib uns.</p>
             <a class="email" href="mailto:d4ily@d4ily.de">d4ily@d4ily.de</a>
-            <p class="muted" style="margin-bottom:0">
-              Für allgemeine Anfragen, Feedback und Informationen zum Projekt.
-            </p>
           </div>
           <a class="btn btn-primary" href="mailto:d4ily@d4ily.de?subject=Anfrage%20zu%20Daily%20Flow">
-            E-Mail schreiben
+            E-Mail schreiben ↗
           </a>
         </div>
       </div>
@@ -733,26 +1106,18 @@
 
     <section id="rechtliches">
       <div class="container">
-        <div class="section-head">
-          <div class="kicker">Rechtliche Informationen</div>
-          <h2>Offene Angaben vor dem öffentlichen Produktstart.</h2>
+        <div class="section-head reveal">
+          <div class="kicker">Informationen</div>
+          <h2>Offen und nachvollziehbar.</h2>
         </div>
-        <div class="legal-note">
+        <div class="legal-note reveal">
           <p>
-            Daily Flow ist ein Projekt in Entwicklung. Diese Website ersetzt
-            weder ein vollständiges Impressum noch eine rechtlich geprüfte
-            Datenschutzerklärung. Vor einem geschäftlichen öffentlichen Betrieb
-            müssen die erforderlichen Angaben zum tatsächlichen Betreiber,
-            eine vollständige Anbieterkennzeichnung und passende
-            Datenschutzhinweise ergänzt werden.
+            Daily Flow befindet sich in Entwicklung. Vor einem geschäftlichen
+            öffentlichen Betrieb müssen die erforderlichen Anbieterangaben und
+            passende Datenschutzhinweise ergänzt werden.
           </p>
           <p>
-            Es werden hier bewusst keine Firmenregistrierung, Geschäftsadresse,
-            Finanzierung oder bereits vorhandene KI-Funktionen behauptet,
-            die nicht tatsächlich bestehen.
-          </p>
-          <p>
-            Allgemeiner Projektkontakt:
+            Für allgemeine Anfragen zum Projekt:
             <a href="mailto:d4ily@d4ily.de">d4ily@d4ily.de</a>
           </p>
         </div>
@@ -763,27 +1128,25 @@
   <footer>
     <div class="container footer-inner">
       <div>
-        <a class="brand" href="#start">daily<span>flow</span></a>
-        <p style="margin:8px 0">
-          Ein unabhängiges Softwareprojekt in Entwicklung.
-        </p>
-        <p style="margin:4px 0">Projektstart: 2022 (Startup in Entwicklung)</p>
-        <p style="margin:4px 0">© <span id="year"></span> Daily Flow</p>
+        <a class="brand" href="#start">daily<span class="accent">flow</span></a>
+        <p class="footer-description">Ein unabhängiges Softwareprojekt in Entwicklung.</p>
+        <p class="footer-meta">Projektstart: 2022 (Startup in Entwicklung)</p>
+        <p class="footer-meta">© <span id="year"></span> Daily Flow</p>
       </div>
-      <div class="footer-links">
+      <nav class="footer-links" aria-label="Footer-Navigation">
         <a href="#projekt">Über das Projekt</a>
-        <a href="#ki-datenschutz">KI & Datenschutz</a>
-        <a href="#rechtliches">Rechtliche Informationen</a>
+        <a href="#verantwortung">KI & Datenschutz</a>
+        <a href="#rechtliches">Informationen</a>
         <a href="mailto:d4ily@d4ily.de">Kontakt</a>
-      </div>
+      </nav>
     </div>
   </footer>
 
   <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
     const requestField = document.getElementById("request");
     const output = document.getElementById("output");
-
-    document.getElementById("year").textContent = new Date().getFullYear();
 
     document.getElementById("generate").addEventListener("click", function () {
       const request = requestField.value.trim();
@@ -800,17 +1163,33 @@
         "und bedanken uns für Ihre Geduld. Wir prüfen Ihr Anliegen und " +
         "melden uns so bald wie möglich mit weiteren Informationen.\n\n" +
         "Sollten Sie noch Ergänzungen haben, können Sie uns diese gerne mitteilen.\n\n" +
-        "Freundliche Grüße\n" +
-        "Ihr Team\n\n" +
-        "— Automatischer Demo-Entwurf —\n" +
-        "Die Antwort wurde aus einer festen Vorlage erstellt und nicht von einer KI generiert.";
+        "Freundliche Grüße\nIhr Team\n\n" +
+        "— Demo-Entwurf aus einer festen Vorlage; keine KI-generierte Antwort —";
     });
 
     document.getElementById("clear").addEventListener("click", function () {
       requestField.value = "";
-      output.textContent = "Dein Antwortentwurf wird hier angezeigt.";
+      output.textContent = "Dein Entwurf wird hier angezeigt.";
       requestField.focus();
     });
+
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add("visible"));
+    }
   </script>
 </body>
 </html>
